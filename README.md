@@ -39,9 +39,9 @@ By mimicking the collaboration of human professionals, this multi-modal agent pi
 
 ## 🔨 Installation
 
-1. Clone this github repository and install the required packages:
+1. Clone this GitHub repository and install the required packages:
 
-    ```shell
+    ``` shell
     git clone https://github.com/DINGYANB/MUSES.git
     cd MUSES
 
@@ -66,16 +66,16 @@ By mimicking the collaboration of human professionals, this multi-modal agent pi
     Since our MUSES is a training-free multi-model collaboration system,  feel free to replace the generative models with other competitive ones. For example, we recommend users to replace the Llama-3-8B with more powerful LLMs like [Llama-3.1-8B](https://huggingface.co/meta-llama/Llama-3.1-8B) and [GPT 4o](https://platform.openai.com/docs/models/gpt-4o).
 
 3. *Optional* Downloads:
-- Download our self-built 3D model shop at this [link](https://huggingface.co/yanboding/MUSES/upload/main), which includes 300 high quality 3D models, and 1500 images of various objects with different orientations for fine-tuing the [CLIP](https://huggingface.co/openai/clip-vit-base-patch32).
+- Download our self-built 3D model shop at this [link](https://huggingface.co/yanboding/MUSES/upload/main), which includes 300 high-quality 3D models, and 1500 images of various objects with different orientations for fine-tuing the [CLIP](https://huggingface.co/openai/clip-vit-base-patch32).
 - Download multiple ControlNets such as [SD3-Tile-ControlNet](https://huggingface.co/InstantX/SD3-Controlnet-Tile), [SDXL-Canny-ControlNet](https://huggingface.co/TheMistoAI/MistoLine), [SDXL-Depth-ControlNet](https://huggingface.co/diffusers/controlnet-zoe-depth-sdxl-1.0), and other image generation models, e.g., [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) with [VAE](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix).
 
 
 ## 🌟 Usage
 Use the following command to generate images.
-```shell
+``` shell
 cd MUSES && bash multi_runs.sh "test_prompt.txt" "test"
 ```
-Where the **first argument** is the input txt file containing the prompt in rows, and the **second argument** is the identifier of the current run, which will be appended to the output folder name. For SD3-Canny-ControlNet, each prompt results in 5 images of different control scales.
+Where the **first argument** is the input txt file containing the prompts in rows, and the **second argument** is the identifier of the current run, which will be appended to the output folder name. For SD3-Canny-ControlNet, each prompt results in 5 images of different control scales.
 
 
 ## 📊 Dataset & Benchmark
@@ -86,17 +86,17 @@ Our expanded NSR-1K dataset is in the directory `dataset/NSR-1K-Expand`.
 
 ### Benchmark Evaluation
 
-For *T2I-CompBench* evaluation, we follow its offical evaluation codes in this [link](https://github.com/Karine-Huang/T2I-CompBench). Note that we choose the best score among the 5 images as the final score. 
+For *T2I-CompBench* evaluation, we follow its official evaluation codes in this [link](https://github.com/Karine-Huang/T2I-CompBench). Note that we choose the best score among the 5 images as the final score. 
 
 Since T2I-CompBench lacks detailed descriptions of complex 3D spatial relationships of multiple objects, we construct our T2I-3DisBench (`dataset/T2I-3DisBench.txt`), which describes diverse 3D image scenes with 50 detailed prompts. 
-For *T2I-3DisBench* evaluation, we employ [Mini-InternVL-2B-1.5](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) to score the generated images from 0.0 to 1.0 across four dimensions, including: object count, object orientation, 3D spatial relationship, and camera view. You can download the weights at this [link](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) and put them into the folder `model/InternVL/`.
+For *T2I-3DisBench* evaluation, we employ [Mini-InternVL-2B-1.5](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) to score the generated images from 0.0 to 1.0 across four dimensions, including object count, object orientation, 3D spatial relationship, and camera view. You can download the weights at this [link](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) and put them into the folder `model/InternVL/`.
 
 ```shell
 python inference_code/internvl_vqa.py
 ```
 
-After runing it, it will output an average score.
-Our MUSES demenstrates state-of-the-art performance on both benchmarks, verifying its effectiveness.
+After running it, it will output an average score.
+Our MUSES demonstrates state-of-the-art performance on both benchmarks, verifying its effectiveness.
 
 ## 💙 Acknowledgement
 MUSES is built upon 
@@ -107,7 +107,7 @@ MUSES is built upon
 [SD](https://github.com/Stability-AI/generative-models),
 [ControlNet](https://github.com/lllyasviel/ControlNet).
 We acknowledge these open-source codes and models, and the website [CGTrader](https://www.cgtrader.com) for supporting 3D model free downloads.
-We appreciate as well the valuable insights from researchers
+We appreciate as well the valuable insights from the researchers
 at the Shenzhen Institute of Advanced Technology and the
 Shanghai AI Laboratory.
 
