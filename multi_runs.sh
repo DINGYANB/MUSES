@@ -1,6 +1,5 @@
 input_file=$1
 info=$2
-camera=$3
 random_number=$((20000 + RANDOM % 10001))
 start_time=$(date +%s)
 
