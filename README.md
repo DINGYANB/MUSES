@@ -63,7 +63,7 @@ By mimicking the collaboration of human professionals, this multi-modal agent pi
     | [examples_features.npy](https://huggingface.co/yanboding/MUSES/upload/main) | `/dataset/` | In-Context Learning |
     | [finetuned_clip_epoch_20.pth](https://huggingface.co/yanboding/MUSES/upload/main) | `/model/CLIP/` | Orientation Calibration |
 
-    Since our MUSES is a training-free multi-model collaboration system,  feel free to replace the generative models with other competitive ones. For example, we recommend users to replace the Llama-3-8B with more powerful LLM like [Llama-3.1-8B](https://huggingface.co/meta-llama/Llama-3.1-8B) and [GPT 4o](https://platform.openai.com/docs/models/gpt-4o).
+    Since our MUSES is a training-free multi-model collaboration system,  feel free to replace the generative models with other competitive ones. For example, we recommend users to replace the Llama-3-8B with more powerful LLMs like [Llama-3.1-8B](https://huggingface.co/meta-llama/Llama-3.1-8B) and [GPT 4o](https://platform.openai.com/docs/models/gpt-4o).
 
 3. *Optional* Downloads:
 - Download our self-built 3D model shop at this [link](https://huggingface.co/yanboding/MUSES/upload/main), which includes 300 high quality 3D models, and 1500 images of various objects with different orientations for fine-tuing the [CLIP](https://huggingface.co/openai/clip-vit-base-patch32).
