@@ -23,7 +23,7 @@
 
 Despite recent advancements in text-to-image generation, most existing methods struggle to create images with multiple objects and complex spatial relationships in 3D world. To tackle this limitation, we introduce a generic AI system, namely MUSES, for 3D-controllable image generation from user queries.
 
-<img width="743" alt="image" src="https://github.com/DINGYANB/MUSES/assets/demo.png">
+<img width="743" alt="image" src="https://github.com/DINGYANB/MUSES/blob/main/assets/demo.png">
 </a>
 
 
@@ -38,9 +38,8 @@ By mimicking the collaboration of human professionals, this multi-modal agent pi
 
 <!-- Additionally, we find that existing benchmarks lack detailed descriptions of complex 3D spatial relationships of multiple objects. To fill this gap, we further construct a new benchmark of T2I-3DisBench (3D image scene), which describes diverse 3D image scenes with 50 detailed prompts.  -->
 
-<img width="743" alt="image" src="https://github.com/DINGYANB/MUSES/assets/overview.png">
+<img width="743" alt="image" src="https://github.com/DINGYANB/MUSES/blob/main/assets/overview.png">
 </a>
-
 
 ## 🔨 Installation
 
