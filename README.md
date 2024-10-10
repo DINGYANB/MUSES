@@ -54,8 +54,8 @@ By mimicking the collaboration of human professionals, this multi-modal agent pi
 
 2. Download other required models:
 
-    | Model                |     Storage Path     |    Role    |
-    |----------------------|----------------------|-------------|
+    | Model                |     Storage Path     |    Description    |
+    |----------------------|----------------------|-------------------|
     | [OpenAI ViT-L-14](https://huggingface.co/openai/clip-vit-large-patch14) | `model/CLIP/` | Similarity Comparison |
     | [Meta Llama-3-8B](https://huggingface.co/meta-llama/Meta-Llama-3-8B) | `model/Llama3/` | 3D Layout Planning | 
     | [stabilityai stable-diffusion-3-medium (SD3)](https://huggingface.co/stabilityai/stable-diffusion-3-medium) | `model/SD3-Base/` | Image Generation |
@@ -91,7 +91,7 @@ For *T2I-CompBench* evaluation, we follow its official evaluation codes in this 
 Since T2I-CompBench lacks detailed descriptions of complex 3D spatial relationships of multiple objects, we construct our T2I-3DisBench (`dataset/T2I-3DisBench.txt`), which describes diverse 3D image scenes with 50 detailed prompts. 
 For *T2I-3DisBench* evaluation, we employ [Mini-InternVL-2B-1.5](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) to score the generated images from 0.0 to 1.0 across four dimensions, including object count, object orientation, 3D spatial relationship, and camera view. You can download the weights at this [link](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) and put them into the folder `model/InternVL/`.
 
-```shell
+``` shell
 python inference_code/internvl_vqa.py
 ```
 
@@ -113,6 +113,7 @@ Shanghai AI Laboratory.
 
 
 ## 📝 Citation
+If our MUSES system helps your work, please cite this paper:
 ```bib
 @article{ding2024muses,
       title={MUSES: 3D-Controllable Image Generation via Multi-Modal Agent Collaboration}, 
