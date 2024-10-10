@@ -60,13 +60,13 @@ By mimicking the collaboration of human professionals, this multi-modal agent pi
     | [Meta Llama-3-8B](https://huggingface.co/meta-llama/Meta-Llama-3-8B) | `model/Llama3/` | 3D Layout Planning | 
     | [stabilityai stable-diffusion-3-medium (SD3)](https://huggingface.co/stabilityai/stable-diffusion-3-medium) | `model/SD3-Base/` | Image Generation |
     | [InstantX SD3-Canny-ControlNet](https://huggingface.co/InstantX/SD3-Controlnet-Canny) | `model/SD3-ControlNet-Canny/` | Controllable Image Generation |
-    | [examples_features.npy](https://huggingface.co/yanboding/MUSES/upload/main) | `/dataset/` | In-Context Learning |
-    | [finetuned_clip_epoch_20.pth](https://huggingface.co/yanboding/MUSES/upload/main) | `/model/CLIP/` | Orientation Calibration |
+    | [examples_features.npy](https://huggingface.co/yanboding/MUSES/resolve/main/examples_features.npy) | `/dataset/` | In-Context Learning |
+    | [finetuned_clip_epoch_20.pth](https://huggingface.co/yanboding/MUSES/resolve/main/finetuned_clip_epoch_20.pth) | `/model/CLIP/` | Orientation Calibration |
 
-    Since our MUSES is a training-free multi-model collaboration system,  feel free to replace the generative models with other competitive ones. For example, we recommend users to replace the Llama-3-8B with more powerful LLMs like [Llama-3.1-8B](https://huggingface.co/meta-llama/Llama-3.1-8B) and [GPT 4o](https://platform.openai.com/docs/models/gpt-4o).
+    Since our MUSES is a training-free multi-model collaboration system, feel free to replace the generative models with other competitive ones. For example, we recommend that users replace the Llama-3-8B with more powerful LLMs like [Llama-3.1-8B](https://huggingface.co/meta-llama/Llama-3.1-8B) and [GPT 4o](https://platform.openai.com/docs/models/gpt-4o).
 
 3. *Optional* Downloads:
-- Download our self-built 3D model shop at this [link](https://huggingface.co/yanboding/MUSES/upload/main), which includes 300 high-quality 3D models, and 1500 images of various objects with different orientations for fine-tuing the [CLIP](https://huggingface.co/openai/clip-vit-base-patch32).
+- Download our self-built 3D model shop in this [directory](https://huggingface.co/yanboding/MUSES/tree/main), which includes 300 high-quality 3D models, and 1500 images of various objects with different orientations for fine-tuning the [CLIP](https://huggingface.co/openai/clip-vit-base-patch32).
 - Download multiple ControlNets such as [SD3-Tile-ControlNet](https://huggingface.co/InstantX/SD3-Controlnet-Tile), [SDXL-Canny-ControlNet](https://huggingface.co/TheMistoAI/MistoLine), [SDXL-Depth-ControlNet](https://huggingface.co/diffusers/controlnet-zoe-depth-sdxl-1.0), and other image generation models, e.g., [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) with [VAE](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix).
 
 
