@@ -1,3 +1,5 @@
+<meta name="google-site-verification" content="-XQC-POJtlDPD3i2KSOxbFkSBde_Uq9obAIh_4mxTkM" />
+
 <div align="center">
 
 <h2><a href="https://arxiv.org/abs/2408.10605">MUSES: 3D-Controllable Image Generation via Multi-Modal Agent Collaboration</a></h2>
