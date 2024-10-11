@@ -89,13 +89,13 @@ Our expanded NSR-1K dataset is in the directory `dataset/NSR-1K-Expand`.
 For *T2I-CompBench* evaluation, we follow its official evaluation codes in this [link](https://github.com/Karine-Huang/T2I-CompBench). Note that we choose the best score among the 5 images as the final score. 
 
 Since T2I-CompBench lacks detailed descriptions of complex 3D spatial relationships of multiple objects, we construct our T2I-3DisBench (`dataset/T2I-3DisBench.txt`), which describes diverse 3D image scenes with 50 detailed prompts. 
-For *T2I-3DisBench* evaluation, we employ [Mini-InternVL-2B-1.5](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) to score the generated images from 0.0 to 1.0 across four dimensions, including object count, object orientation, 3D spatial relationship, and camera view. You can download the weights at this [link](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) and put them into the folder `model/InternVL/`.
+For *T2I-3DisBench* evaluation, we employ [Mini-InternVL-2B-1.5](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) to score the generated images from 0.0 to 1.0 across four dimensions, including object count, object orientation, 3D spatial relationship between objects, and camera view. You can download the weights at this [link](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) and put them into the folder `model/InternVL/`.
 
 ``` shell
-python inference_code/internvl_vqa.py
+python inference_code/internvl_vqa.py "object count"
 ```
 
-After running it, it will output an average score.
+After running it, it will output an average score on the selected dimension.
 Our MUSES demonstrates state-of-the-art performance on both benchmarks, verifying its effectiveness.
 
 ## 💙 Acknowledgement
