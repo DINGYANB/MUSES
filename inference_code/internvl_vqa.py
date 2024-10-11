@@ -161,8 +161,8 @@ for i in range(len(image_files[0])):
         image_index = image.split('/')[-1].split('_')[0]
         print(image_index)
         text = texts[int(image_index)]
-        # question = '''Text: {}\nHow well does the image match the text? You need to consider (1) object count, (2) object orientation, (3) 3D spatial relationship between objects, (4) camera view. Return a tuple ("score", X.XXXX), with the float number between 0 and 1, and higher scores representing higher text-image alignment.'''.format(text)
-        question = '''Text: {}\nHow well does the image match the text? You need to consider camera view. Return a tuple ("score", X.XXXX), with the float number between 0 and 1, and higher scores representing higher text-image alignment.'''.format(text)
+        # question = '''Text: {}\nHow well does the image match the text? You need to consider (1) object count, (2) object orientation, (3) 3D spatial relationship between objects, and (4) camera view. Return a tuple ("score", X.XXXX), with the float number between 0 and 1, and higher scores representing higher text-image alignment.'''.format(text)
+        question = '''Text: {}\nHow well does the image match the text? You need to consider the {}. Return a tuple ("score", X.XXXX), with the float number between 0 and 1, and higher scores representing higher text-image alignment.'''.format(text, sys.argv[1])
         response = model.chat(tokenizer, pixel_values, question, generation_config)
 
         score = extract_score_or_number(response)
