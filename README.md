@@ -26,12 +26,12 @@ Despite recent advancements in text-to-image generation, most existing methods s
 
 ## 🤖 Architecture
 
-Our MUSES realize 3D controllable image generation by developing a progressive workflow with three key components, including:
+Our MUSES realize 3D controllable image generation by developing a progressive workflow with three important components, including:
 1. Layout Manager for 2D-to-3D layout lifting;
 2. Model Engineer for 3D object acquisition and calibration;
 3. Image Artist for 3D-to-2D image rendering.
 
-By mimicking the collaboration of human professionals, this multi-modal agent pipeline facilitates the effective and automatic creation of images with 3D-controllable objects, through an explainable integration of top-down planning and bottom-up generation. 
+By mimicking the collaboration of human professionals, this multi-modal agent pipeline facilitates the effective and automatic creation of images with 3D-controllable objects, through an explainable integration of the top-down planning and the bottom-up generation. 
 
 <img width="800" alt="image" src="https://github.com/DINGYANB/MUSES/blob/main/assets/overview.png">
 </a>
@@ -89,7 +89,7 @@ Our expanded NSR-1K dataset is in the directory `dataset/NSR-1K-Expand`.
 For *T2I-CompBench* evaluation, we follow its official evaluation codes in this [link](https://github.com/Karine-Huang/T2I-CompBench). Note that we choose the best score among the 5 images as the final score. 
 
 Since T2I-CompBench lacks detailed descriptions of complex 3D spatial relationships of multiple objects, we construct our T2I-3DisBench (`dataset/T2I-3DisBench.txt`), which describes diverse 3D image scenes with 50 detailed prompts. 
-For *T2I-3DisBench* evaluation, we employ [Mini-InternVL-2B-1.5](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) to score the generated images from 0.0 to 1.0 across four dimensions, including object count, object orientation, 3D spatial relationship between objects, and camera view. You can download the weights at this [link](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) and put them into the folder `model/InternVL/`.
+For *T2I-3DisBench* evaluation, we employ [Mini-InternVL-2B-1.5](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) to score the generated images from 0.0 to 1.0 across four dimensions, including object count, object orientation, 3D spatial relationship between objects, and camera view. You can download the corresponding VLLM's weights at this [link](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) and put them into the folder `model/InternVL/`.
 
 ``` shell
 python inference_code/internvl_vqa.py "object count"
@@ -107,9 +107,7 @@ MUSES is built upon
 [SD](https://github.com/Stability-AI/generative-models),
 [ControlNet](https://github.com/lllyasviel/ControlNet).
 We acknowledge these open-source codes and models, and the website [CGTrader](https://www.cgtrader.com) for supporting 3D model free downloads.
-We appreciate as well the valuable insights from the researchers
-at the Shenzhen Institute of Advanced Technology and the
-Shanghai AI Laboratory.
+We also appreciate the valuable insights from the researchers at the Shenzhen Institute of Advanced Technology and the Shanghai AI Laboratory.
 
 
 ## 📝 Citation
