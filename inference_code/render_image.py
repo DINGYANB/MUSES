@@ -75,9 +75,7 @@ def initialize(scene, output_img_dir, main_directory, key_data, item_data):
     else: 
         randon_x = random.randint(-1, 1)
     if "camera" in item_data[0] and item_data[0]['camera'] == "top view":
-        randon_y = random.randint(-10, -5)
         randon_y = average_depth * 10 - 3
-        # randon_z = random.randint(15, 20)
         camera.location = (0, randon_y, math.sqrt(250 - randon_y**2))
     else:
         camera.location = (randon_x, -math.sqrt(200 - randon_x**2), 5)
