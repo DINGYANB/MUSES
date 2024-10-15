@@ -19,9 +19,11 @@ IMAGENET_STD = (0.229, 0.224, 0.225)
 parser = argparse.ArgumentParser(description='Process some images and a text file.')
 parser.add_argument('--img_dir', type=str, required=True, help='Path for the images.')
 parser.add_argument('--text_file', type=str, required=True, help='Path to the text file.')
+parser.add_argument('--evaluation_type', type=str, required=True, help='Specify the evaluation dimension')
 args = parser.parse_args()
 img_dir = args.img_dir
 text_file = args.text_file
+evaluation_type = args.evaluation_type
 
 def build_transform(input_size):
     MEAN, STD = IMAGENET_MEAN, IMAGENET_STD
@@ -162,7 +164,7 @@ for i in range(len(image_files[0])):
         print(image_index)
         text = texts[int(image_index)]
         # question = '''Text: {}\nHow well does the image match the text? You need to consider (1) object count, (2) object orientation, (3) 3D spatial relationship between objects, and (4) camera view. Return a tuple ("score", X.XXXX), with the float number between 0 and 1, and higher scores representing higher text-image alignment.'''.format(text)
-        question = '''Text: {}\nHow well does the image match the text? You need to consider the {}. Return a tuple ("score", X.XXXX), with the float number between 0 and 1, and higher scores representing higher text-image alignment.'''.format(text, sys.argv[1])
+        question = '''Text: {}\nHow well does the image match the text? You need to consider the {}. Return a tuple ("score", X.XXXX), with the float number between 0 and 1, and higher scores representing higher text-image alignment.'''.format(text, evaluation_type)
         response = model.chat(tokenizer, pixel_values, question, generation_config)
 
         score = extract_score_or_number(response)
