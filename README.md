@@ -94,10 +94,10 @@ Since T2I-CompBench lacks detailed descriptions of complex 3D spatial relationsh
 For *T2I-3DisBench* evaluation, we employ [Mini-InternVL-2B-1.5](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) to score the generated images from 0.0 to 1.0 across four dimensions, including object count, object orientation, 3D spatial relationship between objects, and camera view. You can download the corresponding VLLM's weights at this [link](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5) and put them into the folder `model/InternVL/`.
 
 ``` shell
-python inference_code/internvl_vqa.py "object count"
+python inference_code/internvl_vqa.py --img_dir "/path/to/images" --text_file "/path/to/prompts" --evaluation_type "object count"
 ```
 
-After running it, it will output an average score on the selected dimension.
+After running it, it will output an average score on the specified dimension (evaluation type).
 Our MUSES demonstrates state-of-the-art performance on both benchmarks, verifying its effectiveness.
 
 ## 💙 Acknowledgement
