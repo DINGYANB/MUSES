@@ -116,9 +116,9 @@ We also appreciate the valuable insights from the researchers at the Shenzhen In
 If our MUSES system helps your work, please cite this paper:
 ```bib
 @article{ding2024muses,
-      title={MUSES: 3D-Controllable Image Generation via Multi-Modal Agent Collaboration}, 
-      author={Yanbo Ding and Shaobin Zhuang and Kunchang Li and Zhengrong Yue and Yu Qiao and Yali Wang},
-      journal={arXiv preprint arXiv:2408.10605},
-      year={2024},
+  title={MUSES: 3D-Controllable Image Generation via Multi-Modal Agent Collaboration},
+  author={Ding, Yanbo and Zhuang, Shaobin and Li, Kunchang and Yue, Zhengrong and Qiao, Yu and Wang, Yali},
+  journal={arXiv preprint arXiv:2408.10605},
+  year={2024}
 }
 ```
