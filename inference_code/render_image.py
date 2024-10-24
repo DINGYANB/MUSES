@@ -60,9 +60,7 @@ def initialize(scene, output_img_dir, main_directory, key_data, item_data):
     camera = bpy.data.objects['Camera']
     light = bpy.data.objects['Light']
     depth = [item.get("depth", 0) for item in item_data]
-    area = [[item["left"], item["top"], item["left"] + item["width"], item["top"] + item["height"]] for item in item_data]
     average_depth = (max(depth) + min(depth)) / 2
-    average_area = [[max(item), min(item)] for item in area]
 
     # Camera View
     if "camera" in item_data[0]:
@@ -113,9 +111,8 @@ def initialize(scene, output_img_dir, main_directory, key_data, item_data):
 def render_3D_to_2D(scene, llm_info, vllm_info, rotation_data, output_img_dir, obj_files, log_file, main_directory):
     key_data = [key for item_info in llm_info for key, _ in item_info.items()]
     item_data = [value for item_info in llm_info for _, value in item_info.items()]
-    bboxs = [[item["left"], item["top"], item["width"], item["height"]] for item in item_data]
-    current_bbox = draw_bounding_box(bboxs, key_data)
-    cv2.imwrite(main_directory + '/bbox.png', current_bbox)
+
+    # initialize the environment
     initialize(scene, output_img_dir, main_directory, key_data, item_data)
     
     for i in range(len(obj_files)): 
