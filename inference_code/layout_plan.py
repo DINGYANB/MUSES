@@ -23,14 +23,7 @@ parser.add_argument('--append', type=str, default='no_append_info')
 args = parser.parse_args()
 
 
-def reorder_list(key_order, lst):
-    key_index = {key: idx for idx, key in enumerate(key_order)}
-    print("key_index", key_index)
-    sorted_lst = sorted(lst, key=lambda x: key_index.get(x[0], float('inf')))
-    
-    return sorted_lst
-
-
+# Draw bbox image
 def draw_bounding_box(bboxes, texts):
     # Create a white background image
     image = np.ones((1024, 1024, 3), dtype=np.uint8) * 255
@@ -55,30 +48,7 @@ def draw_bounding_box(bboxes, texts):
     return image
 
 
-def create_3d_depth_examplar_prompt(json_path):
-    prompt = ""
-    depth_examples = json.load(open(json_path))
-    for dic in depth_examples:
-        prompt += 'User Input: ' + dic['User Input'] + '\n' + 'Layout Information: ' + str(dic['Layout Information']) + '\n' +  'Output: ' + str(dic['Output']) + '\n\n'
-    return prompt
-
-
-def create_3d_orientation_examplar_prompt(json_path):
-    prompt = ""
-    orientation_examples = json.load(open(json_path))
-    for dic in orientation_examples:
-        prompt += 'User Input: ' + dic['User Input'] + '\n' + 'Layout Information: ' + str(dic['Layout Information']) + '\n' +  'Output: ' + str(dic['Output']) + '\n\n'
-    return prompt
-
-
-def create_3d_camera_view_examplar_prompt(json_path):
-    prompt = ""
-    camera_examples = json.load(open(json_path))
-    for dic in camera_examples:
-        prompt += 'User Input: ' + dic['User Input'] + '\n' +  'Output: ' + str(dic['Output']) + '\n\n'
-    return prompt
-
-
+# RAG prompts
 def create_exemplar_prompt(caption, object_list, canvas_size, is_chat=False):
     if is_chat:
         prompt = ''
@@ -93,6 +63,7 @@ def create_exemplar_prompt(caption, object_list, canvas_size, is_chat=False):
     return prompt
 
 
+# Prompt for 2D layout planning
 def f_form_prompt(text_input, current_feature, top_k, examples, features):
     rtn_prompt = 'Instruction: You are a master of image layout planning. Your task is to plan the realistic layout of the image according to the given prompt. ' \
                  'The generated layout should follow the CSS style, where each line starts with the object description and is followed by its absolute position. ' \
@@ -136,6 +107,7 @@ def f_form_prompt(text_input, current_feature, top_k, examples, features):
     return rtn_prompt
 
 
+# 2D-to-3D layout plan
 def llm_plan(model, user_input, layout_plan_prompt, index):
     # 111 --- 2D layout plan
     print(layout_plan_prompt)
@@ -206,8 +178,6 @@ def llm_plan(model, user_input, layout_plan_prompt, index):
         print("Image saved successfully.", '\n' + '-' * 30)
     else:
         print("Failed to save image.", '\n' + '-' * 30)
-    torch.cuda.empty_cache()
-    torch.cuda.synchronize()
 
     # 222 --- 3D layout plan
     depth_prompt = 'User Input: {}\nLayout Information: {}\n\n' \
@@ -232,15 +202,14 @@ def llm_plan(model, user_input, layout_plan_prompt, index):
                     'directly set the camera view to "front view". If find one, go to the second step with the following setting rule:' \
                     '\n- Extract strings among "front view", "left view", "right view" or "top view" from the user input as the camera view.' \
                     '\n\nYour final answer must be in JSON format, where key is "camera view" and value is one of the strings "front view", "left view", "right view" or "top view". Follow the above two steps and give some explanation. Do not include any code.'.format(user_input)
-    print(depth_prompt, '\n', orientation_prompt, '\n', camera_prompt)
+    # print(depth_prompt, '\n', orientation_prompt, '\n', camera_prompt)
 
     dialogs: List[Dialog] = [[{"role": "user", "content": depth_prompt}], [{"role": "user", "content": orientation_prompt}], [{"role": "user", "content": camera_prompt}]]
     results = model.chat_completion(dialogs, temperature=0.2, top_p=0.1)
     depth_info, orientation_info, camera_info = results[0]['generation']['content'], results[1]['generation']['content'], results[2]['generation']['content']
-    print(depth_info, '\n' + '-' * 30 + '\n', orientation_info, '\n' + '-' * 30 + '\n', camera_info, '\n' + '-' * 30 + '\n')
-    torch.cuda.empty_cache()
-    torch.cuda.synchronize()
-    
+    print(depth_info, '\n' + '=' * 100 + '\n', orientation_info, '\n' + '=' * 100 + '\n', camera_info)
+
+    # Extract useful information
     json_pattern_1 = re.compile(r"\[\[.*?\]\]", re.DOTALL)      # For Depth/Orientation
     json_pattern_2 = re.compile(r'\{.*?\}', re.DOTALL)          # For Camera
     json_mathes_depth = json_pattern_1.findall(depth_info)
@@ -260,9 +229,9 @@ def llm_plan(model, user_input, layout_plan_prompt, index):
         for obj in predicted_object_list:
             for key in obj.keys():
                 depth_values.append([key, 0.0])
+
+    print('\n', '=' * 100)
     print(obj_list)
-    # print(depth_values)
-    # depth_values = reorder_list(obj_list, depth_values)
     print(depth_values)
     orientation_values = []
     if json_mathes_orientation:
@@ -278,9 +247,8 @@ def llm_plan(model, user_input, layout_plan_prompt, index):
         for obj in predicted_object_list:
             for key in obj.keys():
                 orientation_values.append([key, "forward"])
-    # print(orientation_values)
-    # orientation_values = reorder_list(obj_list, orientation_values)
     print(orientation_values)
+    
     camera_value = {"camera view": "front view"}
     if json_mathes_camera:
         json_str = json_mathes_camera[-1].strip().replace("'", '"')
@@ -292,6 +260,7 @@ def llm_plan(model, user_input, layout_plan_prompt, index):
         camera_value = {"camera view": "front view"}
     print(camera_value)
 
+    # Lift 2D layout to 3D
     for dic in predicted_object_list:
         for key, value in dic.items():
             try:
