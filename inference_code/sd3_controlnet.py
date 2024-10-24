@@ -57,7 +57,7 @@ with open(error_file, "a") as ef:
             print(index, line)
             path = f"../output/{sys.argv[2]}/{index}_{line}"
             if not os.path.exists(f'{path}/entity_info.json') or not os.path.exists(f'{path}/default_orientation_info.json'):
-                print('-' * 50)
+                print('=' * 100)
                 continue
 
             for condition_scale in paras:
