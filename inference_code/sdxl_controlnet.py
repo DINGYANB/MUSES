@@ -12,11 +12,11 @@ from tqdm import tqdm
 warnings.filterwarnings("ignore")
 
 
-def image_generation(prompt, ppath, output_folder, pipe, condition_scale, index, generator=None):
+def image_generation(prompt, path, pipe, condition_scale, index, generator=None):
     control_images = []
     filename = prompt[:100]
-    depth_filename = ppath + "/rendering/depth/depth0000001.png"
-    original_filename = ppath + "/rendering/frame000.png"
+    depth_filename = path + "/rendering/depth/depth0000001.png"
+    original_filename = path + "/rendering/frame000.png"
     depth_image = Image.open(depth_filename).convert("RGB")
     ori_image = Image.open(original_filename).convert("RGB")
     canny_image = cv2.Canny(np.array(ori_image), 50, 150, apertureSize=5)
@@ -24,15 +24,15 @@ def image_generation(prompt, ppath, output_folder, pipe, condition_scale, index,
     canny_image = np.concatenate([canny_image, canny_image, canny_image], axis=2)
     canny_image = Image.fromarray(canny_image)
     control_images.append(canny_image)
-    canny_image.save(ppath + '/' + filename + "_canny.png")
+    canny_image.save(path + '/' + filename + "_canny.png")
     control_images.append(depth_image)
-    depth_image.save(ppath + '/' + filename + "_depth.png")
+    depth_image.save(path + '/' + filename + "_depth.png")
 
     negative_prompt = "sketches, blurry, false, low quality, bad quality"
     print("prompt: ", prompt, '\t', condition_scale)
     image = pipe(prompt, negative_prompt=negative_prompt, num_inference_steps=50, image=control_images, controlnet_conditioning_scale=[condition_scale, condition_scale]).images[0]
-    saving_path = output_folder + '/' + str(index) + "_" + filename + '.png'
-    print(saving_path)
+    saving_path = f"{path}/scale_{condition_scale}.png"
+    print(f"generated image saved to {saving_path}")
     image.save(saving_path)
 
 # Load Multiple ControlNets
@@ -67,15 +67,13 @@ with open(error_file, "a") as ef:
             prompt = text
             line = text[:100]
             print(index, line)
-            path = "../output/obj_output_" + sys.argv[2] + "/" + line
+            path = f"../output/obj_output_{sys.argv[2]}/{index}_{line}"
             if not os.path.exists(f'{path}/entity_info.json') or not os.path.exists(f'{path}/default_orientation_info.json'):
-                print('-' * 50)
+                print('=' * 100)
                 continue
             
             for condition_scale in paras:
-                output_folder = f"{path}/final_img_sdxl_scale_{str(condition_scale)}"
-                os.makedirs(output_folder, exist_ok=True)
-                image_generation(prompt, path, output_folder, pipe, condition_scale, index)
+                image_generation(prompt, path, pipe, condition_scale, index)
 
         # Debug
         except Exception as e:
