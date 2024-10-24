@@ -9,29 +9,6 @@ import cv2
 import numpy as np
 
 
-def draw_bounding_box(bboxes, texts):
-    # Create a white background image
-    image = np.ones((1024, 1024, 3), dtype=np.uint8) * 255
-    # Draw bounding boxes
-    colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 0, 255), (0, 255, 255), (128, 128, 128), (0, 0, 0)]
-    for i, (bbox, text) in enumerate(zip(bboxes, texts)):
-        x = int(bbox[0] * 1024)
-        y = int(bbox[1] * 1024)
-        width = int(bbox[2] * 1024)
-        height = int(bbox[3] * 1024)
-        color = colors[i % len(colors)]
-        cv2.rectangle(image, (x, y), (x + width, y + height), color, 4)
-
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        font_scale = 0.8
-        font_thickness = 2
-        text_size = cv2.getTextSize(text, font, font_scale, font_thickness)[0]
-        text_x = x + (width - text_size[0]) // 2
-        text_y = y + 20
-        cv2.putText(image, text, (text_x, text_y), font, font_scale, color, font_thickness)
-
-    return image
-
 
 def initialize(scene, output_img_dir, main_directory, key_data, item_data):
     bpy.ops.object.select_all(action='DESELECT')
