@@ -5,7 +5,7 @@
 <h2><a href="https://arxiv.org/abs/2408.10605">MUSES: 3D-Controllable Image Generation via Multi-Modal Agent Collaboration</a></h2>
 
 
-[Yanbo Ding*](https://github.com/DINGYANB),
+[Yanbo Ding](https://github.com/DINGYANB),
 [Shaobin Zhuang](https://scholar.google.com/citations?user=PGaDirMAAAAJ&hl=zh-CN&oi=ao), 
 [Kunchang Li](https://scholar.google.com/citations?user=D4tLSbsAAAAJ), 
 [Zhengrong Yue](https://arxiv.org/search/?searchtype=author&query=Zhengrong%20Yue), 
